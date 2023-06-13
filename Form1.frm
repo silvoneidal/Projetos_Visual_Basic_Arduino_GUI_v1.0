@@ -306,22 +306,6 @@ Private Sub Form_Unload(Cancel As Integer)
 
 End Sub
 
-'////////////////////////////////////////////////////////////////////////////////////////////
-
-'Private Sub cmdArduinoCLI_KeyPress(KeyAscii As Integer)
-'   ' Define o caminho do arduino-cli
-'    Dim arduinoCliPath As String
-'    arduinoCliPath = "C:\arduino-cli.exe" ' Substitua pelo caminho correto do arduino-cli em seu sistema
-'
-'    ' Define o comando para help arduino-cli
-'    Dim commandCmd As String
-'    commandCmd = "arduino-cli --help" ' comando para abrir o help do arduino-cli
-'
-'    ' Executa o comando para help arduino-cli e abre a janela do prompt de comando
-'    ShellExecute Me.hwnd, "open", "cmd.exe", "/k " & commandCmd, vbNullString, vbNormalFocus
-'
-'End Sub
-
 Private Sub cmdSketch_Click()
     ' Define o filtro para exibir apenas arquivos de texto
     CommonDialog1.Filter = "Arquivos de Texto (*.ino)|*.ino"
@@ -350,8 +334,8 @@ Private Sub cmdCompile_Click()
 
     ' Define o comando para compilar o arquivo .ino
     Dim compileCmd As String
-    'compileCmd = "arduino-cli compile " & Board & " -v " & sketchPath " ' não cria arquivo binário
-     compileCmd = "arduino-cli compile --fqbn " & Board & " -v -e " & sketchPath ' cria arquivo binário"
+    'compileCmd = "arduino-cli compile " & Board & " -v " & sketchPath " ' sem arquivo binário, com detalhe processo
+     compileCmd = "arduino-cli compile --fqbn " & Board & " -v -e " & sketchPath ' com arquivo binário, com detalhe processo
 
     ' Executa o comando de compilação e abre a janela do prompt de comando
     ShellExecute Me.hwnd, "open", "cmd.exe", "/k " & compileCmd, vbNullString, vbNormalFocus
@@ -373,8 +357,8 @@ Private Sub cmdUpload_Click()
 
     ' Define o comando para fazer o upload do arquivo compilado para o Arduino Uno
     Dim uploadCmd As String
-    uploadCmd = "arduino-cli upload -p " & Port & " --fqbn " & Board & " -v " & sketchPath ' Substitua "COMx" pela porta correta do seu Arduino Uno
-
+    uploadCmd = "arduino-cli upload -p " & Port & " --fqbn " & Board & " -v " & sketchPath
+    
     ' Executa o comando de upload e abre a janela do prompt de comando
     ShellExecute Me.hwnd, "open", "cmd.exe", "/k " & uploadCmd, vbNullString, vbNormalFocus
     
